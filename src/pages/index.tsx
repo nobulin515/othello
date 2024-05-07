@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import styles from './index.module.css';
 
+const conuntStone = [2, 2
+]
+
+
 const directions = [
   [-1, 1],
   [0, 1],
@@ -18,13 +22,13 @@ const Home = () => {
   const [turnColor, setTurnColor] = useState(1);
   const [board, setBoard] = useState([
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 2],
-    [0, 0, 0, 0, 0, 0, 0, 2],
-    [0, 0, 0, 1, 2, 0, 0, 2],
-    [0, 0, 0, 2, 1, 0, 0, 2],
-    [0, 0, 0, 0, 0, 0, 0, 2],
-    [0, 0, 0, 0, 0, 0, 0, 2],
-    [0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 2, 0, 0, 0],
+    [0, 0, 0, 2, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
   ]);
   const clickHandler = (x: number, y: number) => {
     console.log(x, y);
@@ -42,27 +46,51 @@ const Home = () => {
             newBoard[y][x] = turnColor;
 
             console.log(targetArrays)
-            for(const targetArray of targetArrays){
+            for (const targetArray of targetArrays) {
               newBoard[targetArray[0]][targetArray[1]] = turnColor;
             }
-
-
-
-
             setTurnColor(3 - turnColor);
             setBoard(newBoard);
-            break;
-          } else {
-            break;
+            conuntStone[0]=0;{conuntStone[1]=0}
+
+
+            for (let o = 0; o < 8; i++) {
+              for (let n = 0; n < 8; n++) {
+
+
+
+                if (newBoard[o][n] === turnColor) {
+                  conuntStone[0] += 1
+
+
+                } else if (newBoard[o][n] === 3 - turnColor) {
+                  conuntStone[1] += 1
+                }
+
+
+              }
+
+
+
+
+            }
+
           }
         }
+
+        break;
       }
     }
+
+
 
 
   };
   return (
     <div className={styles.container}>
+      <div />
+      <div>{turnColor === 1 ? 'BlackTurn' : 'WhiteTurn'}</div>
+      <div>{conuntStone[0]}BlackStone,{conuntStone[1]}WhiteStone  </div>
       <div className={styles.boardStyle}>
         {board.map((row, y) =>
           row.map((color, x) => (
@@ -71,7 +99,7 @@ const Home = () => {
                 <div
                   className={styles.stoneStyle}
                   style={{ background: color === 1 ? '#000' : '#fff' }}
-                    
+
 
                 />
               )}
